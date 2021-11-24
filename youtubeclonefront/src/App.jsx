@@ -12,7 +12,8 @@ class App extends Component {
             video: '0U2zJOryHKQ',
             comments: [],
             searchWord: "",
-            key: 'AIzaSyDQwq4lGQKgcFn5OERre4zrWEOcv5lc2jk'
+            key: 'AIzaSyDQwq4lGQKgcFn5OERre4zrWEOcv5lc2jk',
+            videoOptions: []
          }
     }
 
@@ -25,7 +26,8 @@ class App extends Component {
         let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${search}&key=${this.state.key}&part=snippet`,this.state)
         console.log(response)
         this.setState({
-            video: response.data.items[0].id.videoId
+            video: response.data.items[0].id.videoId,
+            videoOptions: [response.data]
         })
         console.log(this.state.video)
 
@@ -53,6 +55,7 @@ class App extends Component {
                 <SearchBar searchedVid = {this.searchedVid}/>
                 {/* <SearchBar watchVideosFunction = {this.watchVideos}/> */}
                 <VideoPlayer videoId = {this.state.video}/>
+                <ThumbNail videoOptions = {this.state.videoOptions}/>
 
             </div>
         );
