@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, {Component} from 'react';
 
 
@@ -6,28 +7,35 @@ class SearchBar extends Component {
         super(props);
         this.state = {
             searchWord : '',
+            key: 'AIzaSyDQwq4lGQKgcFn5OERre4zrWEOcv5lc2jk',
         }
     }
     
     handleChange = (event) =>{
         this.setState({
-            searchWord : event.target.value
+            [event.target.name] : event.target.value
         })
     }
 
-    handleSubmit = (event) =>{
+    handleSubmit = async(event) =>{
         event.preventDefault();
-        this.props.handleChange(this.state)
+        let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${this.state.searchWord}&key=${this.state.key}&part=snippet`,this.state)
+        console.log(response)
+        this.setState({
+            searchWord : response.data
+        })
+        // this.props.handleChange(this.state)
     }
 
     render(){
         return(
-            <form onSubmit = {this.handleSubmit}>
+            <form onSubmit ={(event) => this.handleSubmit(event)}>
                 <label>Search</label>
-                    <input type = 'text' value = {this.state.searchWord}
-                    onChange = {this.handleChange} />
+                    <input type = 'text' name="searchWord" onChange = {this.handleChange} value = {this.state.searchWord}
+                     />
                 
-                <input type = "submit" value = "Submit" />
+                <button onclick={this.handleSubmit} type = "submit" value = "Submit"> Search</button>
+                
             </form>
 
         )

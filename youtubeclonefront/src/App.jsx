@@ -1,4 +1,4 @@
-import React from "react";
+import React , {useState, useEffect} from "react";
 import SearchBar from "./Components/SearchBar/SearchBar";
 import {Component} from "react";
 import VideoPlayer from "./Components/VideoPlayer/VideoPlayer";
@@ -12,34 +12,35 @@ class App extends Component {
             searchResults:[],
             comments: [],
             searchWord: "",
- 
          }
     }
 
     componentDidMount(){
         console.log("do something please")
-        this.watchVideos()
+        // this.watchVideos()
     }
     
-watchVideos = async (searchWord) =>{
-    console.log("It works", searchWord)
-    try{
-        let response = await axios.get('https://www.googleapis.com/youtube/v3/search?q=$(searchWord)&key=${key}&part=snippet');
-        this.setState({
-            videoResults: response.data.items})
-    }
-    catch(except){
-        console.log("it didn't work")
+// watchVideos = async (searchWord) =>{
+//     console.log("It works", searchWord)
+//     try{
+//         let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${this.state.searchWord}&key=${this.state.key}&part=snippet`);
+//         this.setState({
+//             videoResults: response.data.items})
+//     }
+//     catch(except){
+//         console.log("it didn't work")
 
-    }
-}
+//     }
+// }
+
 
     render() { 
         console.log(this.state)
         return (
             <div className = 'container'>
                 <h2>NewTube</h2>
-                <SearchBar watchVideosFunction = {this.watchVideos}/>
+                <SearchBar />
+                {/* <SearchBar watchVideosFunction = {this.watchVideos}/> */}
                 <VideoPlayer />
 
                 
