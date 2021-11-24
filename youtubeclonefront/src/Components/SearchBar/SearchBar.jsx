@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, {Component} from 'react';
+import { runInThisContext } from 'vm';
 
 
 class SearchBar extends Component {
@@ -19,11 +20,7 @@ class SearchBar extends Component {
 
     handleSubmit = async(event) =>{
         event.preventDefault();
-        let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${this.state.searchWord}&key=${this.state.key}&part=snippet`,this.state)
-        console.log(response)
-        this.setState({
-            searchWord : response.data
-        })
+        this.props.searchedVid(this.state.searchWord)
         // this.props.handleChange(this.state)
     }
 
@@ -37,6 +34,7 @@ class SearchBar extends Component {
                 <button onclick={this.handleSubmit} type = "submit" value = "Submit"> Search</button>
                 
             </form>
+
 
         )
     }

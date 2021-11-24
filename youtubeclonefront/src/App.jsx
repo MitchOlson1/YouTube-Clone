@@ -9,15 +9,26 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = { 
-            searchResults:[],
+            video: '0U2zJOryHKQ',
             comments: [],
             searchWord: "",
+            key: 'AIzaSyDQwq4lGQKgcFn5OERre4zrWEOcv5lc2jk'
          }
     }
 
     componentDidMount(){
         console.log("do something please")
         // this.watchVideos()
+    }
+
+    searchedVid = async(search)=>{
+        let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${search}&key=${this.state.key}&part=snippet`,this.state)
+        console.log(response)
+        this.setState({
+            video: response.data.items[0].id.videoId
+        })
+        console.log(this.state.video)
+
     }
     
 // watchVideos = async (searchWord) =>{
@@ -39,11 +50,10 @@ class App extends Component {
         return (
             <div className = 'container'>
                 <h2>NewTube</h2>
-                <SearchBar />
+                <SearchBar searchedVid = {this.searchedVid}/>
                 {/* <SearchBar watchVideosFunction = {this.watchVideos}/> */}
-                <VideoPlayer />
+                <VideoPlayer videoId = {this.state.video}/>
 
-                
             </div>
         );
 }
