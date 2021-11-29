@@ -41,8 +41,7 @@ class App extends Component {
             <div className = 'container'>
                 <h2>NewTube</h2>
                 <SearchBar searchedVid = {this.searchedVid}/>
-                <VideoPlayer videoId = {this.state.video} key = {this.state.key}/>
-           
+                <VideoPlayer videoId = {this.state.video} key = {this.state.key} /> 
 
             </div>
         );
