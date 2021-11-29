@@ -13,7 +13,7 @@ class App extends Component {
             video: '0U2zJOryHKQ',
             comments: [],
             searchWord: "",
-            key: 'AIzaSyDQwq4lGQKgcFn5OERre4zrWEOcv5lc2jk',
+            key:'AIzaSyDQwq4lGQKgcFn5OERre4zrWEOcv5lc2jk',
             videoOptions: []
          }
     }
@@ -28,9 +28,9 @@ class App extends Component {
         console.log(response)
         this.setState({
             video: response.data.items[0].id.videoId,
-            videoOptions: [response.data]
+            videoOptions: [response.data.items]
         })
-        console.log(this.state.video)
+        console.log("options:", this.state.videoOptions)
 
     }
     
@@ -42,8 +42,8 @@ class App extends Component {
             <div className = 'container'>
                 <h2>NewTube</h2>
                 <SearchBar searchedVid = {this.searchedVid}/>
-                <VideoPlayer videoId = {this.state.video}/>
-                {/* <ThumbNail needs to be fixed in order to have app work correctly /> */}
+                <VideoPlayer videoId = {this.state.video} key = {this.state.key}/>
+           
 
             </div>
         );

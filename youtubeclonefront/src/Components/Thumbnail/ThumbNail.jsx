@@ -6,7 +6,9 @@ import React, {Component} from 'react';
 class ThumbNail extends Component {
     constructor(props) {
         super(props);
-        this.state = {  }
+        this.state = { 
+           
+         }
             // i = 0
     }
 
@@ -18,10 +20,10 @@ class ThumbNail extends Component {
 
     render(){
         return(
-            <div>
-            <img src={`${this.props.videoOptions.[0].data.items[2].snippet.thumbnails.default.url}`} alt={`${this.props.videoOptions[0].data.items[2].snippet.description}`} width="10%" height="10%"></img>
-            </div>
-
+        <div>
+            {this.props.vids.map((element)=>
+            <img src={`${element.snippet.thumbnails.default.url}`}  width="10%" height="10%"/>)}
+        </div>
         )
     }
 
