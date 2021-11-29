@@ -7,12 +7,24 @@ class ThumbNail extends Component {
     constructor(props) {
         super(props);
         this.state = {  }
+            // i = 0
     }
-    render() { 
-        return ( 
-            //Need to pass through the this.props.videoOptions as a href with locations and src based off of item in array
-         );
+
+    handleChange = (event) =>{
+        this.setState({
+            [event.target.name] : event.target.value
+        })
     }
+
+    render(){
+        return(
+            <div>
+            <img src={`${this.props.videoOptions.[0].data.items[2].snippet.thumbnails.default.url}`} alt={`${this.props.videoOptions[0].data.items[2].snippet.description}`} width="10%" height="10%"></img>
+            </div>
+
+        )
+    }
+
 }
- 
+
 export default ThumbNail;

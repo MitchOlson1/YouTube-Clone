@@ -3,6 +3,7 @@ import SearchBar from "./Components/SearchBar/SearchBar";
 import {Component} from "react";
 import VideoPlayer from "./Components/VideoPlayer/VideoPlayer";
 import axios from 'axios';
+import ThumbNail from "./Components/Thumbnail/ThumbNail";
 
 
 class App extends Component {
@@ -19,7 +20,7 @@ class App extends Component {
 
     componentDidMount(){
         console.log("do something please")
-        // this.watchVideos()
+
     }
 
     searchedVid = async(search)=>{
@@ -33,18 +34,6 @@ class App extends Component {
 
     }
     
-// watchVideos = async (searchWord) =>{
-//     console.log("It works", searchWord)
-//     try{
-//         let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${this.state.searchWord}&key=${this.state.key}&part=snippet`);
-//         this.setState({
-//             videoResults: response.data.items})
-//     }
-//     catch(except){
-//         console.log("it didn't work")
-
-//     }
-// }
 
 
     render() { 
@@ -53,9 +42,8 @@ class App extends Component {
             <div className = 'container'>
                 <h2>NewTube</h2>
                 <SearchBar searchedVid = {this.searchedVid}/>
-                {/* <SearchBar watchVideosFunction = {this.watchVideos}/> */}
                 <VideoPlayer videoId = {this.state.video}/>
-                <ThumbNail videoOptions = {this.state.videoOptions}/>
+                {/* <ThumbNail needs to be fixed in order to have app work correctly /> */}
 
             </div>
         );

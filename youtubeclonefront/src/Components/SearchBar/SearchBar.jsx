@@ -21,7 +21,7 @@ class SearchBar extends Component {
     handleSubmit = async(event) =>{
         event.preventDefault();
         this.props.searchedVid(this.state.searchWord)
-        // this.props.handleChange(this.state)
+
     }
 
     render(){
