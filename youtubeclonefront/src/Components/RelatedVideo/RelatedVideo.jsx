@@ -3,13 +3,14 @@ import React, {Component} from 'react';
 
 
 
-class ThumbNail extends Component {
+
+class RelatedVideo extends Component {
     constructor(props) {
         super(props);
         this.state = { 
            
          }
-            // i = 0
+    
     }
 
     handleChange = (event) =>{
@@ -22,11 +23,12 @@ class ThumbNail extends Component {
         return(
         <div>
             {this.props.vids.map((element)=>
-            <img src={`${element.snippet.thumbnails.default.url}`}  width="10%" height="10%"/>)}
+            <a  href={`https://www.youtube.com/embed/${element.id.videoId}`}><img src={`${element.snippet.thumbnails.default.url}`} alt={`${element.snippet.description}`} width="15%" height="15%"/></a>)}
+           
         </div>
         )
     }
 
 }
 
-export default ThumbNail;
+export default RelatedVideo;

@@ -3,7 +3,7 @@ import SearchBar from "./Components/SearchBar/SearchBar";
 import {Component} from "react";
 import VideoPlayer from "./Components/VideoPlayer/VideoPlayer";
 import axios from 'axios';
-import ThumbNail from "./Components/Thumbnail/ThumbNail";
+import RelatedVideo from "./Components/RelatedVideo/RelatedVideo";
 
 
 class App extends Component {
@@ -13,7 +13,7 @@ class App extends Component {
             video: '0U2zJOryHKQ',
             comments: [],
             searchWord: "",
-            key:'AIzaSyDQwq4lGQKgcFn5OERre4zrWEOcv5lc2jk',
+            key:'AIzaSyCZ6QMW_1qdf4B9Vsp9hdGTjb8yel8vzTo',
             videoOptions: []
          }
     }
@@ -25,7 +25,7 @@ class App extends Component {
 
     searchedVid = async(search)=>{
         let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${search}&key=${this.state.key}&part=snippet`,this.state)
-        console.log(response)
+        console.log("I made it")
         this.setState({
             video: response.data.items[0].id.videoId,
             videoOptions: [response.data.items]
@@ -37,7 +37,6 @@ class App extends Component {
 
 
     render() { 
-        console.log(this.state)
         return (
             <div className = 'container'>
                 <h2>NewTube</h2>
