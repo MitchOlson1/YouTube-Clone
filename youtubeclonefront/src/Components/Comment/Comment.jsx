@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import axios from 'axios';
 import React, {Component} from 'react';
 
@@ -9,7 +8,9 @@ class Comment extends Component {
         super(props);
         this.state = {
          comment : '',
-
+         video_id : this.props.video_id,
+         likes : 0,
+         dislikes: 0
         }
     }
     
@@ -21,10 +22,7 @@ class Comment extends Component {
 
     handleSubmit = async(event) =>{
         event.preventDefault();
-        let response = await axios.post('http://127.0.0.1:8000/youtube_clone_backend/',this.state.comment)
-        this.setState({
-            comment : response.data
-        })
+        await axios.post('http://127.0.0.1:8000/youtube_clone_backend/',this.state)
     }
 
     render(){
@@ -41,67 +39,3 @@ class Comment extends Component {
 }
 
 export default Comment;
-=======
-import React from "react";
-import axios from "axios";
-
-
-class AllComments extends Component {
-    constructor(props) {
-        super(props);
-        this.state = { 
-        }
-
-    getComments = async =>(){
-        response = await axios.get(`http://127.0.0.1:8000/youtubeclone/comments`)
-    }
-
-    newComments = async =>(){
-        response = await axios.post(`http://127.0.0.1:8000/youtubeclone/comments`)
-    }
-
-    likeComment = async =>(){
-    }
-
-    dislikeComment = async =>(){
-    }
-
-
-}
-    render() { 
-        return ( 
-            <div className = "comment_section">
-                <div class = "container">
-            <form action = "{url"    
-            
-                </div>
-
-
-
-
-            </div>
-
-         );
-    }
-}
- 
-export default AllComments;
-
-
-
-
-
-
-
-
-
-
-<form onSubmit ={(event) => this.handleSubmit(event)}>
-                <label>Search</label>
-                    <input type = 'text' name="searchWord" onChange = {this.handleChange} value = {this.state.searchWord}
-                     />
-                
-                <button onclick={this.handleSubmit} type = "submit" value = "Submit"> Search</button>
-                
-            </form>
->>>>>>> 7fc07848167f8833fd8c91e91ee399355fcf7aed

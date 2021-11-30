@@ -5,6 +5,7 @@ import VideoPlayer from "./Components/VideoPlayer/VideoPlayer";
 import axios from 'axios';
 import RelatedVideo from "./Components/RelatedVideo/RelatedVideo";
 import Comment from "./Components/Comment/Comment";
+import Reply from "./Components/Reply/Reply";
 
 
 class App extends Component {
@@ -29,7 +30,13 @@ class App extends Component {
     componentDidMount(){
         this.relatedVids()
         this.currentVid()
+        this.allComments()
     } 
+    allComments = async()=>{
+        let response = await axios.get(`http://127.0.0.1:8000/youtube_clone_backend/`)
+        console.log(response)
+    }
+
 
     searchedVid = async(search)=>{
         let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${search}&key=${this.state.key}&part=snippet`)
@@ -58,9 +65,10 @@ class App extends Component {
     currentVid = async() =>{
         let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${this.state.video}&key=${this.state.key}&part=snippet`,this.state.currentVid)
         this.setState({
-            currentVidTitle : response.data.items[0].snippet.title,
-            currentVidDescription: response.data.items[0].snippet.description
+        currentVidTitle : response.data.items[0].snippet.title,
+        currentVidDescription: response.data.items[0].snippet.description
         })
+    
         console.log('current vid:',this.state.currentVid)
     }
 
@@ -74,7 +82,8 @@ class App extends Component {
                 <div><h2>{this.state.currentVidTitle}</h2></div>
                 <VideoPlayer videoId = {this.state.video} key = {this.state.key} /> 
                 <div><p>{this.state.currentVidDescription}</p></div>
-                <Comment />
+                <Comment video_id ={this.state.video}/>
+                <Reply video_id ={this.state.video}/>
                 <RelatedVideo vids = {this.state.relatedVids}/>
 
             </div>
