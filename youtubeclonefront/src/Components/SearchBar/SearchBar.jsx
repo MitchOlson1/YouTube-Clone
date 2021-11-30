@@ -10,7 +10,7 @@ class SearchBar extends Component {
         this.state = {
             searchWord : '',
             relatedVids: [],
-            key: 'AIzaSyCZ6QMW_1qdf4B9Vsp9hdGTjb8yel8vzTo',
+            key: 'AIzaSyBQFGUjvpPQQ8bVKmDyWNd9yFTDv0JOGm4',
         }
     }
     
