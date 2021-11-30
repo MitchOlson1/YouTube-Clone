@@ -14,7 +14,8 @@ class App extends Component {
             comments: [],
             searchWord: "",
             key:'AIzaSyCZ6QMW_1qdf4B9Vsp9hdGTjb8yel8vzTo',
-            videoOptions: []
+            videoOptions: [],
+            vidDiscription:""
          }
     }
 
@@ -28,7 +29,8 @@ class App extends Component {
         console.log("I made it")
         this.setState({
             video: response.data.items[0].id.videoId,
-            videoOptions: [response.data.items]
+            videoOptions: [response.data.items],
+            vidDescription : response.data.items[0].snippet.description,
         })
         console.log("options:", this.state.videoOptions)
 
