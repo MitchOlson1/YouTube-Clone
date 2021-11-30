@@ -13,13 +13,13 @@ class App extends Component {
             video: 'vJH_ViWK2M4',
             comments: [],
             searchWord: "",
-            key:'AIzaSyDJG62q7flQ5wuq5gC-NNPOTgBYsg5bOdU',
+            key:'AIzaSyBQiDeKWrhUpGtXZ0e0WT3cucAPYs-iLFI',
             videoOptions: [],
             vidDescription:'',
             vidTitle : '',
             currentVid: '',
             currentVidtitle : '',
-            currentViddescription : '',
+            currentVidDescription : '',
             relatedVids: []
 
          }
@@ -38,22 +38,24 @@ class App extends Component {
             video: response.data.items[0].id.videoId,
             videoOptions: [response.data.items],
             vidDescription : response.data.items[0].snippet.description,
-            vidTitle : response.data.items[0].snippet.title
+            vidTitle : response.data.items[0].snippet.title,
+            currentVidDescription : response.data.items[0].snippet.description,
+            currentVidTitle : response.data.items[0].snippet.title
         });
         console.log("I made it again")
         console.log("options:", this.state.videoOptions)
     }
 
     relatedVids = async() =>{
-        let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?relatedToVideoId=${this.props.videoId}&type=video&key=AIzaSyDJG62q7flQ5wuq5gC-NNPOTgBYsg5bOdU&part=snippet`)
+        let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?relatedToVideoId=${this.state.video}&type=video&key=${this.state.key}&part=snippet`)
         this.setState({
             relatedVids: response.data.items
         })
         console.log('related vids:',this.state.relatedVids)
     }
-
+    
     currentVid = async() =>{
-        let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${this.props.videoId}&key=AIzaSyDJG62q7flQ5wuq5gC-NNPOTgBYsg5bOdU&part=snippet`,this.state.currentVid)
+        let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${this.state.video}&key=${this.state.key}&part=snippet`,this.state.currentVid)
         this.setState({
             currentVidTitle : response.data.items[0].snippet.title,
             currentVidDescription: response.data.items[0].snippet.description
@@ -67,10 +69,10 @@ class App extends Component {
         return (
             <div className = 'container'>
                 <h2>NewTube</h2>
-                <div><p>{this.state.currentVidtitle}</p></div>
-                <SearchBar searchedVid = {this.searchedVid}/>
+                <h2><SearchBar searchedVid = {this.searchedVid}/></h2>
+                <div><h2>{this.state.currentVidTitle}</h2></div>
                 <VideoPlayer videoId = {this.state.video} key = {this.state.key} /> 
-                <div><p>{this.state.currentViddescription}</p></div>
+                <div><p>{this.state.currentVidDescription}</p></div>
                 <RelatedVideo vids = {this.state.relatedVids}/>
 
             </div>
