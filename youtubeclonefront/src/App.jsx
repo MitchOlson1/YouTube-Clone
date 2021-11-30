@@ -4,6 +4,7 @@ import {Component} from "react";
 import VideoPlayer from "./Components/VideoPlayer/VideoPlayer";
 import axios from 'axios';
 import RelatedVideo from "./Components/RelatedVideo/RelatedVideo";
+import Comment from "./Components/Comment/Comment";
 
 
 class App extends Component {
@@ -73,6 +74,7 @@ class App extends Component {
                 <div><h2>{this.state.currentVidTitle}</h2></div>
                 <VideoPlayer videoId = {this.state.video} key = {this.state.key} /> 
                 <div><p>{this.state.currentVidDescription}</p></div>
+                <Comment />
                 <RelatedVideo vids = {this.state.relatedVids}/>
 
             </div>
